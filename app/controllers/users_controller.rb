@@ -6,24 +6,33 @@ def new
 
 
 end
-#
-# def create
-#
-#   if params[:name] == nil || params[:name] == ""
-#     redirect_to login_path
-#   else
-#     session[:name] = params[:name]
-#     redirect_to root_path
-#   end
-#
-# end
-#
-# def destroy
-#
-#   session[:name] = nil
-#   redirect_to login_path
-#
-# end
+
+
+def create
+  # if password and password confirmation match
+  #binding.pry
+  if params[:user][:password] == params[:user][:password_confirmation]
+    #create a user
+    @user = User.create(params.require(:user).permit(:name, :password))
+    session[:user_id] = @user.id
+    redirect_to sessions_path
+  else
+  #  binding.pry
+    #don't create a user
+    redirect_to new_user_path
+  end
+
+
+
+
+end
+
+
+
+
+
+
+
 
 
 end

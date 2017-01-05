@@ -3,14 +3,16 @@
 class SessionsController < ApplicationController
 
 def new
+  # this is where you would direct to a login page
+
 end
 
 def create
-  @user = User.find_by(name: params[:name])
+  @user = User.find_by(name: params[:user][:name])
   # if the name and password are authenticated
 
 #  binding.pry
-  if @user && @user.authenticate(params[:password]) && (params[:password] == params[:password_confirmation])
+  if @user && @user.authenticate(params[:user][:password])
     # set the session id
     session[:user_id] = @user.id
     # redirect to
